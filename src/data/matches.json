@@ -1,0 +1,15 @@
+[
+  {
+    "id": "a764b5fe-9e87-4da9-84b0-fd58548ce37a",
+    "createdAt": "2026-05-19T19:03:08.677Z",
+    "tournamentId": "4c720065-b554-44b8-b024-1bc8d78b2586",
+    "awayTeamId": "f42027e5-8ad1-44e7-96ae-ea727e865eb5",
+    "homeTeamId": "7bc1e88c-0520-46ff-b975-c39d0143f072",
+    "kickOff": "Sat Dec 26 2026 23:15:01 GMT-0500 (hora estándar de Colombia)",
+    "awayScore": 0,
+    "homeScore": 0,
+    "_status": "draft",
+    "_state": {},
+    "_timeToCloseInMinutes": 10
+  }
+]

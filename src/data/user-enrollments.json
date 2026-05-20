@@ -1,0 +1,14 @@
+[
+  {
+    "id": "c711dd8c-0613-4b42-b921-216bbbdc9476",
+    "createdAt": "2026-05-15T21:48:04.456Z",
+    "userId": "c384ed57-725b-4aeb-8e3d-bcd44cd395b4",
+    "tournamentInstanceId": "5096379a-1a68-48e2-97a5-445e4798248b",
+    "tournamentId": "4c720065-b554-44b8-b024-1bc8d78b2586",
+    "joinedAt": "2026-05-15T21:48:04.456Z",
+    "lastPosition": 0,
+    "currentPosition": 0,
+    "currentScore": 0,
+    "streak": 0
+  }
+]

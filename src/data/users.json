@@ -1,0 +1,23 @@
+[
+  {
+    "id": "c384ed57-725b-4aeb-8e3d-bcd44cd395b4",
+    "createdAt": "2026-05-15T15:12:46.613Z",
+    "name": "Sergio",
+    "notificationToken": "",
+    "email": "sergio.posadaurrea@gmail.com"
+  },
+  {
+    "id": "f49bac93-e80e-4559-88d5-ba7d0ce4bbf8",
+    "createdAt": "2026-05-15T19:24:11.139Z",
+    "name": "Jorge",
+    "notificationToken": "",
+    "email": "jorgio@gmail.com"
+  },
+  {
+    "id": "a4b2c7ae-45dd-4cad-9f6e-bee9eb6d5eee",
+    "createdAt": "2026-05-15T20:03:41.017Z",
+    "name": "Los master",
+    "notificationToken": "XXX",
+    "email": "losmaster@gmail.com"
+  }
+]
