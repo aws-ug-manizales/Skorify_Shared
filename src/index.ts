@@ -7,3 +7,11 @@ export { TournamentInstanceRepository } from "./repositories/tournament-instance
 export { TeamRepository } from "./repositories/team.repository";
 export { NotificationImpl } from "./core/notifications.impl";
 export { UserEnrollmentRepository } from "./repositories/user-enrollment.repository";
+
+export { MatchMapper } from "./mappers/match.mapper";
+export { PredictionMapper } from "./mappers/prediction.mapper";
+export { TeamMapper } from "./mappers/team.mapper";
+export { TournamentInstanceMapper } from "./mappers/tournament-instance.mapper";
+export { TournamentMapper } from "./mappers/tournament.mapper";
+export { UserEnrollmentMapper } from "./mappers/user-enrollment.mappert";
+export { UserMapper } from "./mappers/user.mapper";
