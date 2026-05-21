@@ -1,6 +1,11 @@
-import { BaseContract, BuiltEntityDomainEvent, Entity, Filters } from '@skorify/domain/core';
-import { BaseMapper } from './base.mapper';
-import { DataSource } from './data-source.interface';
+import {
+  BaseContract,
+  BuiltEntityDomainEvent,
+  Entity,
+  Filters,
+} from "@skorify/domain/core";
+import { BaseMapper } from "./base.mapper";
+import { DataSource } from "./data-source.interface";
 
 /**
  * BaseRepository implementa las operaciones CRUD del BaseContract.
@@ -9,7 +14,7 @@ import { DataSource } from './data-source.interface';
 export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
   constructor(
     protected dataSource: DataSource<T>,
-    protected mapper: BaseMapper<Attrs>,
+    protected mapper: BaseMapper,
   ) {
     super();
   }
@@ -39,7 +44,7 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
     return entity;
   }
 
-  async deleteById(id: string): Promise<T | null> {
+  async delete(id: string): Promise<T | null> {
     const items = await this.dataSource.read();
     const entity = items.find((item) => item.id === id);
 
@@ -50,7 +55,8 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
     return entity;
   }
 
-  async modifyById(id: string, entity: T): Promise<T | null> {
+  async modify(entity: T): Promise<T | null> {
+    const id = entity.id;
     const items = await this.dataSource.read();
     const index = items.findIndex((item) => item.id === id);
 
@@ -63,10 +69,12 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
   }
 
   private mapItems(items: any[]): T[] {
-    return items.map(item => {
-      const mapped = this.mapper.fromJson(item);
-      return mapped.is(BuiltEntityDomainEvent) ? (mapped.payload as T) : null;
-    }).filter(item => item !== null) as T[];
+    return items
+      .map((item) => {
+        const mapped = this.mapper.fromJson(item);
+        return mapped.is(BuiltEntityDomainEvent) ? (mapped.payload as T) : null;
+      })
+      .filter((item) => item !== null) as T[];
   }
 
   async getAll(): Promise<T[]> {
@@ -86,7 +94,12 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
     const normalizedWhere = Array.isArray(filters.where)
       ? filters.where
       : Object.entries(filters.where).map(([attribute, value]) => {
-          if (typeof value === 'object' && value !== null && 'type' in value && 'value' in value) {
+          if (
+            typeof value === "object" &&
+            value !== null &&
+            "type" in value &&
+            "value" in value
+          ) {
             return {
               attribute,
               type: value.type,
@@ -96,7 +109,7 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
 
           return {
             attribute,
-            type: 'equals',
+            type: "equals",
             value,
           };
         });
@@ -106,20 +119,24 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
         const entityValue = (entity as Record<string, any>)[where.attribute];
 
         switch (where.type) {
-          case 'equals':
+          case "equals":
             return entityValue === where.value;
 
-          case 'like':
-            return String(entityValue).toLowerCase().includes(String(where.value).toLowerCase());
+          case "like":
+            return String(entityValue)
+              .toLowerCase()
+              .includes(String(where.value).toLowerCase());
 
-          case 'moreThan':
+          case "moreThan":
             return entityValue > (where.value ?? 0);
 
-          case 'lessThan':
+          case "lessThan":
             return entityValue < (where.value ?? 0);
 
-          case 'in':
-            return Array.isArray(where.value) ? where.value.includes(entityValue) : false;
+          case "in":
+            return Array.isArray(where.value)
+              ? where.value.includes(entityValue)
+              : false;
 
           default:
             return false;
@@ -134,11 +151,11 @@ export class BaseRepository<T extends Entity, Attrs> extends BaseContract<T> {
           const bValue = (b as Record<string, any>)[column];
 
           if (aValue > bValue) {
-            return direction === 'ASC' ? 1 : -1;
+            return direction === "ASC" ? 1 : -1;
           }
 
           if (aValue < bValue) {
-            return direction === 'ASC' ? -1 : 1;
+            return direction === "ASC" ? -1 : 1;
           }
         }
 

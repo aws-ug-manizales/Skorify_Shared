@@ -137,16 +137,16 @@ describe('MatchRepository – getByIDs()', () => {
 });
 
 // ---------------------------------------------------------------------------
-// modifyById()
+// modify()
 // ---------------------------------------------------------------------------
-describe('MatchRepository – modifyById()', () => {
+describe('MatchRepository – modify()', () => {
   it('updates the match and returns the updated version', async () => {
     const repo = makeRepo();
     const match = buildMatch1();
     await repo.save(match);
 
     match.setScores(3, 0);
-    const updated = await repo.modifyById(id1, match);
+    const updated = await repo.modify(match);
 
     expect(updated).not.toBeNull();
     expect(updated!.awayScore).toBe(3);
@@ -156,7 +156,7 @@ describe('MatchRepository – modifyById()', () => {
   it('returns null when the match does not exist', async () => {
     const repo = makeRepo();
 
-    const result = await repo.modifyById('00000000-0000-0000-0000-000000000000', buildMatch1());
+    const result = await repo.modify('00000000-0000-0000-0000-000000000000', buildMatch1());
 
     expect(result).toBeNull();
   });

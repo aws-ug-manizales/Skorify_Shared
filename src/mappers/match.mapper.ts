@@ -1,44 +1,44 @@
-import { DomainEvent } from '@skorify/domain/core';
-import { MatchAttributes, MatchEntity } from '@skorify/domain/match';
-import { BaseMapper } from '../core/base.mapper';
+import { DomainEvent } from "@skorify/domain/core";
+import { MatchAttributes, MatchEntity } from "@skorify/domain/match";
+import { BaseMapper } from "../core/base.mapper";
 
-export class MatchMapper extends BaseMapper<MatchAttributes> {
+export class MatchMapper extends BaseMapper {
   constructor() {
     super();
   }
   fromJson(json: Record<string, any>): DomainEvent {
     return MatchEntity.build({
       id: json.id,
-      tournamentId: json.tournamentId,
-      homeTeamId: json.homeTeamId,
-      awayTeamId: json.awayTeamId,
-      kickOff: new Date(json.kickOff),
-      homeScore: json.homeScore,
-      awayScore: json.awayScore,
+      tournamentId: json.tournament_id,
+      homeTeamId: json.home_team_id,
+      awayTeamId: json.away_team_id,
+      kickOff: new Date(json.kick_off),
+      homeScore: json.home_score,
+      awayScore: json.away_score,
       status: json.status,
       stage: json.stage,
       venue: json.venue,
-      createdAt: new Date(json.createdAt),
-      updatedAt: json.updatedAt ? new Date(json.updatedAt) : undefined,
-      deletedAt: json.deletedAt ? new Date(json.deletedAt) : undefined,
+      createdAt: new Date(json.created_at),
+      updatedAt: json.updated_at ? new Date(json.updated_at) : undefined,
+      deletedAt: json.deleted_at ? new Date(json.deleted_at) : undefined,
     });
   }
 
-  toJson(entity: MatchEntity): MatchAttributes {
+  toJson(entity: MatchEntity) {
     return {
       id: entity.id,
-      tournamentId: entity.tournamentId,
-      homeTeamId: entity.homeTeamId,
-      awayTeamId: entity.awayTeamId,
-      kickOff: entity.kickOff,
-      homeScore: entity.homeScore,
-      awayScore: entity.awayScore,
+      tournament_id: entity.tournamentId,
+      home_team_id: entity.homeTeamId,
+      away_team_id: entity.awayTeamId,
+      kick_off: entity.kickOff,
+      home_score: entity.homeScore,
+      away_score: entity.awayScore,
       status: entity.status,
       stage: entity.stage,
       venue: entity.venue,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-      deletedAt: entity.deletedAt,
+      created_at: entity.createdAt,
+      updated_at: entity.updatedAt,
+      deleted_at: entity.deletedAt,
     };
   }
 }
