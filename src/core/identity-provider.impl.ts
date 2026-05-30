@@ -1,11 +1,47 @@
 import { IdentityProviderContract } from "@skorify/domain/user";
+import {
+  CognitoIdentityProviderClient,
+  SignUpCommand,
+} from "@aws-sdk/client-cognito-identity-provider";
+export class IdentityProviderImpl extends IdentityProviderContract {
+  constructor(
+    public client: CognitoIdentityProviderClient,
+    public clientId: string,
+  ) {
+    super();
+  }
 
-export class IdentityProviderMemoryImpl extends IdentityProviderContract {
-  private users: Map<string, any> = new Map();
+  async update(
+    userId: string,
+    password: string,
+    data: {
+      name: string;
+      email: string;
+    },
+  ): Promise<void> {
+    const { name, email } = data;
+    const command = new SignUpCommand({
+      ClientId: this.clientId,
+      Username: email,
+      Password: password,
+      UserAttributes: [
+        {
+          Name: "email",
+          Value: email,
+        },
+        {
+          Name: "userId",
+          Value: userId,
+        },
+        {
+          Name: "name",
+          Value: name,
+        },
+      ],
+    });
 
-  async update(userId: string, data: any): Promise<void> {
-    const currentData = this.users.get(userId) || {};
-    this.users.set(userId, { ...currentData, ...data });
-    console.log(`[IdentityProviderMemory] Updated user ${userId} with:`, data);
+    const response = await this.client.send(command);
+
+    console.log(response);
   }
 }
