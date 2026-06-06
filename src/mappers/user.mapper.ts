@@ -14,6 +14,7 @@ export class UserMapper extends BaseMapper {
       createdAt: new Date(json.created_at),
       updatedAt: json.updated_at ? new Date(json.updated_at) : undefined,
       deletedAt: json.deleted_at ? new Date(json.deleted_at) : undefined,
+      sub: json.sub,
     });
   }
 
@@ -28,6 +29,7 @@ export class UserMapper extends BaseMapper {
       created_at: entity.createdAt,
       updated_at: entity.updatedAt,
       deleted_at: entity.deletedAt,
+      sub: entity.sub,
     };
   }
 }
