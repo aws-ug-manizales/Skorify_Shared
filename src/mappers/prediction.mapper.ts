@@ -20,6 +20,7 @@ export class PredictionMapper extends BaseMapper {
       createdAt: new Date(json.created_at),
       updatedAt: json.updated_at ? new Date(json.updated_at) : undefined,
       deletedAt: json.deleted_at ? new Date(json.deleted_at) : undefined,
+      isCalculated: json.is_calculated ?? false,
     });
   }
 
@@ -37,6 +38,7 @@ export class PredictionMapper extends BaseMapper {
       created_at: entity.createdAt,
       updated_at: entity.updatedAt,
       deleted_at: entity.deletedAt,
+      is_calculated: entity.isCalculated,
     };
   }
 }
